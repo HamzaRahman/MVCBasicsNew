@@ -8,6 +8,7 @@ namespace MVCBasicsNew.Models
 {
     public class Person
     {
+        //Code Requirements:• Models o Person – Person data
         [Key]
         public int ID { get; set; }
         public string Name { get; set; }
