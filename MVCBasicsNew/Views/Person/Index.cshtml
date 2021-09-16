@@ -1,0 +1,87 @@
+﻿@model MVCBasicsNew.Models.PeopleViewModel
+
+@{
+    ViewData["Title"] = "View";
+}
+<form style="float:right;">
+    <input type="submit" value="Search" class="btn btn-primary" style="float: right" />
+    <input id="search" asp-for="SearchPhrase" class="form-control" style="float: right; width: 30%" />
+    <label class="control-label" style="float:right;">Search By Anything</label>
+</form>
+
+<form asp-action="Create">
+    <div class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="CreatePerson.Name" class="control-label"></label>
+                <input asp-for="CreatePerson.Name" class="form-control" />
+                <span asp-validation-for="CreatePerson.Name" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="CreatePerson.PhoneNumber" class="control-label"></label>
+                <input asp-for="CreatePerson.PhoneNumber" class="form-control" />
+                <span asp-validation-for="CreatePerson.PhoneNumber" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label">City</label>
+                <input asp-for="CreatePerson.City" class="form-control" />
+                <span asp-validation-for="CreatePerson.City" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                City
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.people)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    <!--@Html.ActionLink("Edit", "Edit", new { id=item.ID}) |
+                    @Html.ActionLink("Details", "Details", new { @*id = item.ID*@}) |-->
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
