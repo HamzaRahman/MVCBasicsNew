@@ -1,0 +1,27 @@
+﻿@* Instead of being rows in a table, each item in the list should be defined as a div element
+    using Bootstrap row css – basically a page fragment on its own that is not dependent
+    being inside a table element anymore.
+    o This fragment should be defined inside its own partial view, instead of in the view
+    itself.
+    o The partial view should take one instance of the person as its model. *@
+
+@model MVCBasicsNew.Models.Person
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => Model.ID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.Name)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.PhoneNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => Model.City)
+    </td>
+    <td>
+        <!--@Html.ActionLink("Edit", "Edit", new { id= Model.ID}) |
+        @Html.ActionLink("Details", "Details", new { @*id = item.ID*@}) |-->
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ID })
+    </td>
+</tr>

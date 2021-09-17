@@ -63,25 +63,10 @@
     <tbody>
         @foreach (var item in Model.people)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.PhoneNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    <!--@Html.ActionLink("Edit", "Edit", new { id=item.ID}) |
-                    @Html.ActionLink("Details", "Details", new { @*id = item.ID*@}) |-->
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
+            //Moved The Code TO _PersonPartial view and using the line below to use it,
+            //passing item variable which is a Person object
+            //as its Model because _PersonPartial uses a Person Model
+            <partial  name="_PersonPartial" model="item"/>
         }
     </tbody>
 </table>
