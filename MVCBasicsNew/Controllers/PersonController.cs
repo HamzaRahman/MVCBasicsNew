@@ -64,5 +64,24 @@ namespace MVCBasicsNew.Controllers
             PS.Remove(ID);
             return RedirectToAction("Index"); 
         }
+
+        //Create Actions that return PartialView for People button & Details button and return 
+        ///status codes for the Delete action.
+
+        public IActionResult PeopleIndex(string search)
+        {
+            PeopleViewModel PVM = new PeopleViewModel();
+            PVM.SearchPhrase = search;
+            if (string.IsNullOrEmpty(PVM.SearchPhrase))
+            {
+                return PartialView("_PeopleListPartial", PS.All());
+            }
+            return PartialView("_PeopleListPartial", PS.FindBy(PVM));
+        }
+        public IActionResult PersonDetails(int ID)
+        {
+            var person = PS.FindBy(ID);
+            return PartialView("_Person", person);
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@* PartialView with list of people *@
+
+@model MVCBasicsNew.Models.PeopleViewModel
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                City
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.people)
+        {
+            //Moved The Code TO _PersonPartial view and using the line below to use it,
+            //passing item variable which is a Person object
+            //as its Model because _PersonPartial uses a Person Model
+            <partial name="_PersonPartial" model="item" />
+        }
+    </tbody>
+</table>

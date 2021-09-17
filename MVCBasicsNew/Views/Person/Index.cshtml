@@ -9,6 +9,12 @@
     <label class="control-label" style="float:right;">Search By Anything</label>
 </form>
 
+@* MVC Data 3---Text Input and Buttons *@
+<input type="text" id="DetailsID" />
+<input type="button" value="People" id="LoadPeople" />
+<input type="button" value="Details" id="PersonDetails" />
+<input type="button" value="Delete" id="PersonDelete" />
+
 <form asp-action="Create">
     <div class="row">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -42,31 +48,39 @@
     </div>
 </form>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                ID
-            </th>
-            <th>
-                Name
-            </th>
-            <th>
-                PhoneNumber
-            </th>
-            <th>
-                City
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.people)
-        {
-            //Moved The Code TO _PersonPartial view and using the line below to use it,
-            //passing item variable which is a Person object
-            //as its Model because _PersonPartial uses a Person Model
-            <partial  name="_PersonPartial" model="item"/>
-        }
-    </tbody>
-</table>
+@*  The result from pressing any of the three buttons shall be displayed in one element
+    overwriting what was there before. *@
+<div id="PeopleTable">
+    @* Moved People Table Code to _PeopleListPartial view *@
+</div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+        //People – use Ajax Get to fetch the PartialView with list of people and display it on
+        //the page using JavaScript.
+        $("#LoadPeople").click(function () {
+            $('#PeopleTable').load("/Person/PeopleIndex");
+        });
+
+        $("#SearchBt").click(function () {
+            var sc = $("#search").val();
+            $('#PeopleTable').load("/Person/PeopleIndex", {search: sc});
+        });
+        //Details – use an input element so the user can type in an Id of a person and when
+        //thy press the button, make an Ajax Post with Id to fetch a PartialView on the
+        $("#PersonDetails").click(function () {
+            var id = $("#DetailsID").val();
+            $('#PeopleTable').load("/Person/PersonDetails", { ID: id });
+        });
+        //Delete – use the same input element as Details but when thy press the Delete
+        //button, make an Ajax Post with Id to a Delete action that removes the person
+        //that has the Id and display a message on the page if person was removed or not
+        //on the page using JavaScript.
+        $("#PersonDelete").click(function () {
+            var id = $("#DetailsID").val();
+            $('#PeopleTable').load("/Person/Delete", { ID: id });
+            alert("@ViewBag.Message")
+        });
+    });
+</script>
