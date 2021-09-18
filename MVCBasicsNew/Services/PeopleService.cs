@@ -10,12 +10,12 @@ namespace MVCBasicsNew.Services
     public class PeopleService : IPeopleService
     {
         //PeopleService – Implements IPeopleService interface.
-
-
-        //Constructor Injection--Fetching IPeopleRepo Object from Startup ConfigureServices
-        InMemoryPeopleRepo PeopleDatabase = new InMemoryPeopleRepo();
-        public PeopleService()
+        //Use Dependency Injection to constructor inject IPeopleRepo interface into PeopleService class.
+        IPeopleRepo PeopleDatabase;
+        //Use Dependency Injection to constructor inject IPeopleRepo interface into PeopleService class.
+        public PeopleService(IPeopleRepo _PeopleDatabase)
         {
+            PeopleDatabase = _PeopleDatabase;
         }
         //Here we take CreatePersonViewModel object which is used to validate input
         //from user and then we send its properties to InMemoryPeopleRepo

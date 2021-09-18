@@ -10,7 +10,13 @@ namespace MVCBasicsNew.Controllers
 {
     public class PersonController : Controller
     {
-        PeopleService PS = new PeopleService();
+        //No allowed to write “new PeopleService()” inside of the PeopleController class.
+        IPeopleService PS;
+        // Use Dependency Injection to constructor inject IPeopleService interface into PeopleController class.
+        public PersonController(IPeopleService _PS)
+        {
+            PS = _PS;
+        }
         //We will use this method both for all people in a table or based on user search
         //When we load or reload the webpage, it will automatically call this method
         //This is a get method, as we use it to get data to show on page
